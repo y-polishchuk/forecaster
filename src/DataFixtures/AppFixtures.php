@@ -14,23 +14,23 @@ class AppFixtures extends Fixture
     {
         $barcelona = $this->addLocation($manager, 'Barcelona', 'ES', 41.38879, 2.15899);
 
-        $monday = $this->addForecast($manager, $barcelona, '2024-01-01', 23, 25, 1009, 49, 7.7, 90, 0, 'sun');
-        $tuesday = $this->addForecast($manager, $barcelona, '2024-01-02', 20, 17, 999, 70, 3.2, 45, 70, 'cloud');
-        $wednesday = $this->addForecast($manager, $barcelona, '2024-01-03', 21, 22, 1025, 40, 0.7, 0, 25, 'cloud-sun');
+        $dayOne = $this->addForecast($manager, $barcelona, '2026-01-01', 23, 25, 1009, 49, 7.7, 90, 0, 'sun');
+        $dayTwo = $this->addForecast($manager, $barcelona, '2026-01-02', 20, 17, 999, 70, 3.2, 45, 70, 'cloud');
+        $dayThree = $this->addForecast($manager, $barcelona, '2026-01-03', 21, 22, 1025, 40, 0.7, 0, 25, 'cloud-sun');
 
 
         $berlin = $this->addLocation($manager, 'Berlin', 'DE', 52.520008, 13.404954);
 
-        $monday = $this->addForecast($manager, $berlin, '2024-01-01', 11, 9, 989, 92, 1, 180, 75, 'cloud-rain');
-        $tuesday = $this->addForecast($manager, $berlin, '2024-01-02', 10, 10, 1000, 50, 3.2, 90, 70, 'cloud');
-        $wednesday = $this->addForecast($manager, $berlin, '2024-01-03', 15, 13, 1010, 45, 0.7, 0, 25, 'cloud-sun');
+        $dayOne = $this->addForecast($manager, $berlin, '2026-01-01', 11, 9, 989, 92, 1, 180, 75, 'cloud-rain');
+        $dayTwo = $this->addForecast($manager, $berlin, '2026-01-02', 10, 10, 1000, 50, 3.2, 90, 70, 'cloud');
+        $dayThree = $this->addForecast($manager, $berlin, '2026-01-03', 15, 13, 1010, 45, 0.7, 0, 25, 'cloud-sun');
    
 
         $paris = $this->addLocation($manager, 'Paris', 'FR', 48.864716, 2.349014);
 
-        $monday = $this->addForecast($manager, $paris, '2024-01-01', 25, 24, 1007, 49, 6.5, 80, 0, 'sun');
-        $tuesday = $this->addForecast($manager, $paris, '2024-01-02', 21, 19, 995, 68, 3.8, 47, 70, 'cloud');
-        $wednesday = $this->addForecast($manager, $paris, '2024-01-03', 23, 21, 1015, 54, 1.9, 0, 25, 'cloud-sun');
+        $dayOne = $this->addForecast($manager, $paris, '2026-01-01', 25, 24, 1007, 49, 6.5, 80, 0, 'sun');
+        $dayTwo = $this->addForecast($manager, $paris, '2026-01-02', 21, 19, 995, 68, 3.8, 47, 70, 'cloud');
+        $dayThree = $this->addForecast($manager, $paris, '2026-01-03', 23, 21, 1015, 54, 1.9, 0, 25, 'cloud-sun');
 
         $manager->flush();
     }

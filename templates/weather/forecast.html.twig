@@ -1,11 +1,11 @@
 {% extends 'layout_boxed.html.twig' %}
 
-{% block title %}{{ city }}, {{ country_code }} Weather Forecast{% endblock %}
+{% block title %}{{ location.name }}, {{ location.countryCode }} Weather Forecast{% endblock %}
 
 {% block content %}
     <div class="row mt-3">
         <div class="col">
-            <h1>Forecast for {{ city }}, {{ country_code }}</h1>
+            <h1>Forecast for {{ location.name  }}, {{ location.countryCode }}</h1>
         </div>
     </div>
     
@@ -46,7 +46,7 @@
                             <dd>{{ forecast.humidity }}%</dd>
 
                             <dt>Wind</dt>
-                            <dd>{{ forecast.wind_speed }} m/s</dd>
+                            <dd>{{ forecast.windSpeed }} m/s</dd>
 
                             <dt>Cloudiness</dt>
                             <dd>{{ forecast.cloudiness }}%</dd>
@@ -71,13 +71,13 @@
     {{ parent() }}
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
-        var map = L.map('map').setView([41.38879, 2.15899], 10);
+        var map = L.map('map').setView([{{ location.latitude }}, {{ location.longitude }}], 10);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        var marker = L.marker([41.38879, 2.15899]).addTo(map);
+        var marker = L.marker([{{ location.latitude }}, {{ location.longitude }}]).addTo(map);
     </script>
 {% endblock %}
