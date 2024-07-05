@@ -2,13 +2,14 @@
 
 namespace App\Command;
 
-use App\Repository\ForecastRepository;
-use App\Repository\LocationRepository;
+use App\Entity\Location;
+use App\Entity\Forecast;
+use App\Exception\LocationNotFoundException;
+use App\Service\ForecastService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -19,8 +20,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class ForecastLocationNameCommand extends Command
 {
     public function __construct(
-        private LocationRepository $locationRepository,
-        private ForecastRepository $forecastRepository,
+        private ForecastService $forecastService,
     )
     {
         parent::__construct();
@@ -44,18 +44,18 @@ class ForecastLocationNameCommand extends Command
             $io->writeln("Running command with {$cityName}, {$countryCode}");
         }
 
-        $location = $this->locationRepository->findOneBy([
-            'countryCode' => $countryCode,
-            'name' => $cityName
-        ]);
-
-        if (!$location) {
-            throw new \Exception("Location not found");
+        try {
+            /** 
+             * @var Location $location
+             * @var Forecast[] $forecasts
+            */
+            list($location, $forecasts) = $this->forecastService->getForecastsForLocationName($countryCode, $cityName);
+        } catch (LocationNotFoundException $e) {
+            $io->error("Failed to find location $cityName, $countryCode");
+            return Command::FAILURE;
         }
 
-        $forecasts = $this->forecastRepository->findForForecast($location);
-
-        $io->title("Forecast for $cityName, $countryCode");
+        $io->title("Forecast for {$location->getName()}, {$location->getCountryCode()}");
 
         $forecastsArray = [];
 
