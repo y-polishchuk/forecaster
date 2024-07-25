@@ -24,6 +24,7 @@ class LocationType extends AbstractType
                     'United States' => 'US',
                     'United Kingdom' => 'UK',
                     'Portugal' => 'PT',
+                    'Austria' => 'AT',
                 ],
             ])
             ->add('latitude')

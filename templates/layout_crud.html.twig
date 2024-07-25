@@ -24,9 +24,12 @@
                   Preview
               </a>
               <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{{ path('app_weather', {countryCode: 'ES', 'city': 'Barcelona'}) }}">Barcelona</a></li>
-                  <li><a class="dropdown-item" href="{{ path('app_weather', {countryCode: 'DE', 'city': 'Berlin'}) }}">Berlin</a></li>
-                  <li><a class="dropdown-item" href="{{ path('app_weather', {countryCode: 'FR', 'city': 'Paris'}) }}">Paris</a></li>
+                {% for location in get_locations() %}
+                    <li><a class="dropdown-item" href="{{ path('app_weather', {countryCode: location.countryCode, 'city': location.name}) }}">{{ location.name }}</a></li>
+                {% endfor %}
+                  
+                  {# <li><a class="dropdown-item" href="{{ path('app_weather', {countryCode: 'DE', 'city': 'Berlin'}) }}">Berlin</a></li>
+                  <li><a class="dropdown-item" href="{{ path('app_weather', {countryCode: 'FR', 'city': 'Paris'}) }}">Paris</a></li> #}
               </ul>
               </li>
           </ul>

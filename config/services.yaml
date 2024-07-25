@@ -22,3 +22,19 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Twig\AppExtension:
+        arguments:
+            $locationRepository: '@App\Repository\LocationRepository'
+            $cache: '@cache.app'
+        tags:
+            - { name: 'twig.extension' }
+
+    App\EventListener\LocationEventListener:
+        arguments:
+            $cache: '@cache.app'
+            $logger: '@logger'
+        tags:
+            - { name: 'doctrine.event_listener', event: 'postPersist' }
+            - { name: 'doctrine.event_listener', event: 'postUpdate' }
+            - { name: 'doctrine.event_listener', event: 'postRemove' }
